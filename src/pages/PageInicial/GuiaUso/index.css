@@ -1,0 +1,72 @@
+.guia-uso {
+    width: 100%;
+    padding: 120px 0;
+    text-align: center;
+    background-color: #CBE1D4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container */
+.container-guia {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px;
+}
+
+/* Título */
+.guia-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+/* Descrição */
+.guia-description {
+    font-family: 'Nunito', sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: #333;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+/* Lista de instruções */
+.guia-list {
+    list-style: none;
+    padding: 0;
+}
+
+.guia-list li {
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    color: #2e7d32;
+    margin-bottom: 10px;
+}
+
+/* Botão de Roadmap */
+.roadmap-btn {
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 14px 35px;
+    margin-top: 30px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #3E846B, #2e7d32);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.roadmap-btn:hover {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    transform: scale(1.07);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
+}

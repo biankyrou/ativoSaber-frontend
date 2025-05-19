@@ -1,0 +1,63 @@
+.ativo-detalhado {
+    padding: 0 12rem; /* Reduzi o padding para melhor distribuição dos elementos */
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #648d57; /* Cor verde padrão do site */
+    height: 100vh;
+}
+
+.ativo-card {
+    background: #CBE1D4;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
+    width: 22%; /* Aumento para melhorar o layout */
+    text-align: left;
+}
+
+/* Melhorias na área de projeção de rendimento */
+.grafico-rendimento {
+    width: 56%; /* Aumento para maior destaque */
+    background: #CBE1D4;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column; /* Organiza título e gráfico */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilizando título da projeção */
+.grafico-rendimento h2 {
+    font-size: 22px;
+    color: #17631b;
+    margin-bottom: 15px;
+}
+
+.ativo-card h1 {
+    font-size: 22px;
+    color: #17631b;
+    margin-bottom: 15px;
+}
+
+/* Botão de voltar ajustado */
+.voltar-btn {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.voltar-btn img {
+    width: 80px; /* Reduzi o tamanho da seta */
+    transition: transform 0.3s ease;
+}
+
+.voltar-btn:hover img {
+    transform: scale(1.1);
+}

@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+/* Fundo da página verde, alinhado com a estética do site */
+.lista-ativos {
+    width: 100%;
+    height: 100vh;
+    background-color: #648d57; /* Verde igual à tela de cadastro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container central, seguindo o estilo da tela de cadastro */
+.container-lista {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px;
+    background-color: #CBE1D4; /* Cor de fundo do container */
+    padding: 12px 60px 30px 60px;
+    border-radius: 30px;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Título */
+.lista-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #17631b;
+    margin-bottom: 40px;
+}
+
+/* Estilização da lista */
+.lista-ativos ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+/* Cada item da lista agora tem bordas mais arredondadas */
+.lista-ativos li {
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 15px; /* Bordas mais arredondadas */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ativo-info {
+    margin-right: 12px; /* Define um espaçamento entre o texto e o grupo de botões */
+}
+
+/* Contêiner para os botões de ação */
+.button-group {
+    display: flex;
+    gap: 10px; /* Espaço entre os botões */
+}
+
+/* Ajusta os botões para o layout lado a lado */
+.detalhes-btn, .delete-btn {
+    flex: 1;
+    white-space: nowrap; 
+    max-width: 120px; /* Limita o tamanho dos botões */
+    text-align: center;
+}
+
+/* Botão de exclusão menor e mais compacto */
+.delete-btn {
+    font-family: 'Nunito', sans-serif;
+    padding: 6px 12px; /* Botão mais compacto */
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 20px; /* Bordas arredondadas para suavizar o design */
+    background-color: #e77368; /* Vermelho claro */
+    color: white;
+    border: 2px solid #e77368;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.delete-btn:hover {
+    background-color: #e44444; /* Vermelho mais intenso no hover */
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.detalhes-btn {
+    font-family: 'Nunito', sans-serif;
+    padding: 6px 12px; 
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 20px; 
+    background-color: #3E846B; 
+    color: white;
+    border: 2px solid #3E846B;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+}
+
+.detalhes-btn:hover {
+    background-color: #2e7d32;
+    border-color: #1b5e20;
+    box-shadow: 4px 4px 22px rgba(0, 0, 0, 0.3);
+}
+
+.nenhum-ativo {
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 20px;
+  text-align: center;
+}
+

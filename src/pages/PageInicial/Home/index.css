@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+.home {
+    width: 100%; 
+    min-height: 100vh; /* Garante que ocupe a tela inteira */
+    background-color: #5DA479;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.container-home {
+    display: flex;
+    flex-direction: row; /* Alinhando elementos lado a lado */
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 1280px;
+}
+
+/* Texto à esquerda */
+.home-texto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 600px;
+}
+
+/* Imagem à direita */
+.home-imagem {
+    width: 400px; /* Define um tamanho adequado */
+}
+
+.home-imagem img {
+    width: 100%;
+    height: auto;
+}
+
+/* Estilos refinados para textos */
+.home-subtitle  {
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px; 
+    font-weight: 100;
+    color: white;
+    text-align: left; 
+}
+
+.home-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 65px; 
+    font-weight: 300;
+    color: white;
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.home-description {
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    font-weight: 10;
+    color: white;
+    text-align: left;
+    max-width: 700px; 
+}
+
+/* Estilização refinada do botão */
+.cadastro-home-btn {
+    font-family: 'Nunito', sans-serif;
+    padding: 12px 22px; /* Aumento sutil no padding para melhor ergonomia */
+    font-size: 18px; /* Maior destaque no tamanho da fonte */
+    font-weight: bold; /* Torna o texto mais forte */
+    border-radius: 20px; /* Bordas ainda mais arredondadas para um visual moderno */
+    background-color: #3E846B; /* Tom de verde refinado */
+    color: white;
+    border: 2px solid #2e7d32; /* Adiciona um leve contorno */
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15); /* Sombra suave para profundidade */
+}
+
+.cadastro-home-btn:hover {
+    background-color: #2e7d32; /* Verde mais escuro no hover */
+    border-color: #1b5e20;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.25); /* Intensifica a sombra ao passar o mouse */
+}
+
+.cadastro-link {
+    text-decoration: none;
+    color: white;
+    display: block;
+}

@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+
+.header {
+    font-family: 'Nunito', sans-serif;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 18px;
+    background-color: #ffffff; /* Fundo branco */
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px; 
+    height: 50px;
+    margin-right: 15px;
+}
+
+.nav-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center; /* Centraliza os links */
+    gap: 40px;
+}
+
+nav a {
+    color: #2e7d32 !important; /* Garantindo que a cor do menu tenha prioridade */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.home-link {
+  color: #444;               /* cor cinza escura suave */
+  text-decoration: none;     /* sem sublinhado */
+  font-weight: 400;          /* peso normal (mais leve que bold) */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.home-link:hover {
+  color: #666;               /* cinza um pouco mais claro no hover */
+}
+
+
+
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: auto;
+    margin-right: 30px; /* Espaço extra à direita */
+}
+
+.auth-buttons a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    transition: 0.3s;
+}
+
+/* Estilização dos botões de Login e Registrar */
+.login-btn {
+    background-color: #2e7d32; /* Verde sólido */
+    color: white;
+    border: none;
+}
+
+.register-btn {
+    background-color: white; /* Fundo branco */
+    color: #2e7d32;
+    border: 2px solid #2e7d32; /* Contorno verde */
+    margin-right: 20px; /* Espaço extra à direita */
+}
+
+/* Efeito ao passar o mouse */
+.login-btn:hover {
+    background-color: #1b5e20;
+}
+
+.register-btn:hover {
+    background-color: #e0f7e7;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.usuario-logado {
+  margin-right: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.logout-btn {
+    background-color: #2e7d32; 
+    color: white;
+    border: none;
+    display: flex;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #1b5e20;
+}
+
+
