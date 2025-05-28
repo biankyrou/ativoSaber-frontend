@@ -12,7 +12,7 @@ const GuiaDeUso = () => {
                 <ul className="guia-list">
                     <li>✅ Crie sua conta e faça login.</li>
                     <li>✅ Cadastre seus ativos financeiros.</li>
-                    <li>✅ Acompanhe o desempenho dos ativos.</li>
+                    <li>✅ Acompanhe o rendimento dos ativos.</li>
                     <li>✅ Explore os conteúdos educativos sobre investimentos.</li>
                 </ul>
 

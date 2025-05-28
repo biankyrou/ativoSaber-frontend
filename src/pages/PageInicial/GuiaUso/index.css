@@ -1,6 +1,6 @@
 .guia-uso {
     width: 100%;
-    padding: 120px 0;
+    min-height: 100vh;
     text-align: center;
     background-color: #CBE1D4;
     display: flex;

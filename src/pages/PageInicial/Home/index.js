@@ -5,7 +5,7 @@ import imagemHome from '../../../assets/imagem-home.png';
 import { useAuth } from '../../../contexts/AuthContext'; 
 
 const Home = () => {
-    const { user } = useAuth(); // pega o usuário logado
+    const { user } = useAuth(); 
 
     return (
         <section id="inicio" className="home">

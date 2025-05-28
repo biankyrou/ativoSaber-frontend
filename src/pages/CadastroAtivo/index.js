@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';  
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext'; 
+import Swal from 'sweetalert2';
 import './index.css';
 
 const CadastroAtivo = () => {
@@ -9,7 +10,7 @@ const CadastroAtivo = () => {
 
     const [formData, setFormData] = useState({
         nome: '',
-        usuario: '', // começa vazio
+        usuario: '', 
         emissor: '',
         tipo: '',
         valor_unitario: '',
