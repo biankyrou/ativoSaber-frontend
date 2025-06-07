@@ -26,7 +26,7 @@ const CadastroUsuario = () => {
     }
 
     try {
-      const resposta = await axios.get('http://127.0.0.1:8000/api/checar-email/', {
+      const resposta = await axios.get(`${process.env.REACT_APP_API_URL}/checar-email/`, {
         params: { email }
       });
 
@@ -35,7 +35,7 @@ const CadastroUsuario = () => {
         return;
       }
 
-      await axios.post('http://127.0.0.1:8000/api/usuarios/', {
+      await axios.post(`${process.env.REACT_APP_API_URL}/usuarios/`, {
         nome,
         email,
         password: senha,
