@@ -17,7 +17,7 @@ const solicitarResgate = async (id, dataResgate) => {
 
     try {
         const params = { data_resgate: dataResgate };
-        const response = await axios.get(`${REACT_APP_API_URL}/ativos/${id}/solicitar_resgate/`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/ativos/${id}/solicitar_resgate/`, {
             params,
             headers: {
                 Authorization: `Bearer ${token}`,
