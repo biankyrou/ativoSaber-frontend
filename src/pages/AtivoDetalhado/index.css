@@ -5,13 +5,13 @@
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
-    background-color: #648d57; /* Cor verde padrão do site */
+    background-color: #7FA68B; 
     height: 100vh;
 }
 
 .ativo-card {
     background: #CBE1D4;
-    padding: 2.5rem;
+    padding: 2rem;
     border-radius: 12px;
     box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
     width: 22%; /* Aumento para melhorar o layout */
@@ -22,7 +22,7 @@
 .grafico-rendimento {
     width: 56%; /* Aumento para maior destaque */
     background: #CBE1D4;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 12px;
     box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
     display: flex;
@@ -65,9 +65,9 @@
 
 /* Container do resgate */
 .resgate-container {
-  width: 22%; /* Mesma largura do ativo-card para alinhar no layout flex */
+  width: 20%; /* Mesma largura do ativo-card para alinhar no layout flex */
   background: #CBE1D4;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
   display: flex;
@@ -133,7 +133,7 @@
 .resultado-resgate {
   background-color: #4a8c27;
   color: #CBE1D4;
-  padding: 1rem 1.5rem;
+  padding: 0.3rem 1.5rem;
   border-radius: 12px;
   font-weight: 700;
   font-size: 1rem;

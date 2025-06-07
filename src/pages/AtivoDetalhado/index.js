@@ -138,7 +138,7 @@ const AtivoDetalhado = () => {
                 <p><strong>Emissor:</strong> {ativo.emissor}</p>
                 <p><strong>Tipo de Negociação:</strong> {ativo.tipo_negociacao}</p>
                 <p><strong>Valor Unitário:</strong> R$ {Number(ativo.valor_unitario).toFixed(2)}</p>
-                <p><strong>Quantidade:</strong> R$ {Number(ativo.quantidade)}</p>
+                <p><strong>Quantidade:</strong> {Number(ativo.quantidade)}</p>
                 <p><strong>Valor Investido:</strong> R$ {Number(ativo.valor_investido).toFixed(2)}</p>
                 <p><strong>Taxa de Rentabilidade:</strong> {formatarTaxaRentabilidade(ativo)}</p>
                 <p><strong>Tipo de Juros:</strong> {ativo.tipo_juros}</p>
@@ -171,7 +171,13 @@ const AtivoDetalhado = () => {
                     <h3>Solicitar Resgate</h3>
                     <label>
                         Data do Resgate:
-                        <input type="date" value={dataResgate} onChange={(e) => setDataResgate(e.target.value)} />
+                        <input 
+                            type="date" 
+                            value={dataResgate} 
+                            onChange={(e) => setDataResgate(e.target.value)} 
+                            min={ativo.data_emissao} 
+                            max={ativo.data_vencimento} 
+                            />
                     </label>
                     <button onClick={handleSolicitarResgate} disabled={loadingResgate}>
                         {loadingResgate ? 'Calculando...' : 'Solicitar Resgate'}

@@ -136,8 +136,8 @@ const Roadmap = () => {
         </>
       ),
       resources: [
-        { type: 'article', title: 'Guia de Preenchimento de Ativos', link: 'https://exemplo.com/guia-ativos' },
-        { type: 'video', title: 'Demonstração: Como Cadastrar no Ativo Saber', link: 'https://exemplo.com/demo-cadastro' },
+        { type: 'article', title: 'Indicadores financeiros -  B3', link: 'https://www.b3.com.br/pt_br/market-data-e-indices/servicos-de-dados/market-data/consultas/mercado-de-derivativos/indicadores/indicadores-financeiros/' },
+        { type: 'article', title: 'Tabela de Indicadores - Anbima', link: 'https://www.anbima.com.br/pt_br/informar/tabela-de-indicadores.htm' },
       ],
     },
   ];

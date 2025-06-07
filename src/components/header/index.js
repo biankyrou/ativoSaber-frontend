@@ -1,11 +1,14 @@
 import React from 'react';
 import './index.css';
 import logo from '../../assets/logo.png';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';  // importa o contexto
+import { Link, useLocation } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
+import { useAuth } from '../../contexts/AuthContext';
 
 const Header = () => {
-    const { user, logout } = useAuth();  
+    const { user, logout } = useAuth();
+    const location = useLocation();
+    const isHome = location.pathname === '/';
 
     return (
         <header className="header">
@@ -17,9 +20,19 @@ const Header = () => {
             </div>
 
             <nav className="nav-center">
-                <a href="#inicio">Início</a>
-                <a href="#guia">Guia</a>
-                <a href="#contato">Contato</a>
+                {isHome ? (
+                    <>
+                        <a href="#inicio">Início</a>
+                        <a href="#guia">Guia</a>
+                        <a href="#contato">Contato</a>
+                    </>
+                ) : (
+                    <>
+                        <HashLink smooth to="/#inicio">Início</HashLink>
+                        <HashLink smooth to="/#guia">Guia</HashLink>
+                        <HashLink smooth to="/#contato">Contato</HashLink>
+                    </>
+                )}
             </nav>
 
             <div className="auth-buttons">

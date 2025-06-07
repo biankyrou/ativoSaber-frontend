@@ -213,3 +213,27 @@
   position: relative;
   width: 100%;
 }
+
+.campo-calculado {
+  background-color: #f0f0f0 !important;
+  color: #555 !important;
+  cursor: not-allowed !important;
+}
+
+.button-rolagem-fim {
+    position: absolute;
+    top: 85px; /* Ajuste conforme a altura do header */
+    right: 10px;
+}
+
+.scroll-bottom-img {
+  width: 90px;        
+  height: 90px;
+  cursor: pointer;     
+  transition: transform 0.2s ease;
+  user-select: none;   
+}
+
+.scroll-bottom-img:hover {
+  transform: scale(1.1); 
+}

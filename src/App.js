@@ -19,6 +19,7 @@ const PrivateRoute = ({ element }) => {
 };
 
 function App() {
+  console.log('REACT_APP_API_URL:', process.env.REACT_APP_API_URL);
   return (
     <AuthProvider>
       <Router>

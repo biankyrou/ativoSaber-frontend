@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';  
+import React, { useState, useEffect, useRef } from 'react';  
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext'; 
+import scrollIcon from '../../assets/seta-para-baixo.png';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import './index.css';
@@ -10,6 +11,11 @@ const MySwal = withReactContent(Swal);
 const CadastroAtivo = () => {
     const { user } = useAuth();
     const navigate = useNavigate();
+    const formEndRef = useRef(null);
+
+    const scrollToBottom = () => {
+        formEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
     const [formData, setFormData] = useState({
         nome: '',
@@ -130,8 +136,20 @@ const CadastroAtivo = () => {
         navigate('/listar-ativos');
     };
 
+    const valorInvestido =
+        parseFloat(formData.valor_unitario || 0) * parseFloat(formData.quantidade || 0);
+
     return (
         <section className="cadastro-ativo">
+            <div className="button-rolagem-fim">
+                <img 
+                    src={scrollIcon} 
+                    alt="Rolar para o final" 
+                    className="scroll-bottom-img"
+                    onClick={scrollToBottom} 
+                    style={{ cursor: 'pointer' }} 
+                />
+            </div>
             <div className="container-cadastro">
                 <h2 className="cadastro-title">Cadastre seu ativo</h2>
                 <p className="educativo-texto">💡 Cada ativo tem características únicas! Aprenda sobre eles enquanto cadastra o seu.</p>
@@ -196,7 +214,7 @@ const CadastroAtivo = () => {
                     onChange={handleChange} 
                     value={formData.valor_unitario}
                     />
-                    <div className="tooltip tooltip-right">💡 O nome do ativo ajuda a identificar sua categoria e emissor.</div>
+                    <div className="tooltip tooltip-right">💡 É valor de um único ativo no momento da emissão.</div>
                 </div>
 
                 <div className="campo-container tooltip-container">
@@ -211,7 +229,20 @@ const CadastroAtivo = () => {
                     onChange={handleChange} 
                     value={formData.quantidade}
                     />
-                    <div className="tooltip tooltip-right">💡 O nome do ativo ajuda a identificar sua categoria e emissor.</div>
+                    <div className="tooltip tooltip-right">💡 Quantidade de unidades do ativo que você emitiu. Esse valor será multiplicado pelo valor unitário para calcular o total investido</div>
+                </div>
+
+                <div className="campo-container">
+                    <label>Valor Investido (R$)</label>
+                    <input
+                        type="text"
+                        readOnly
+                        value={valorInvestido.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                        })}
+                        className="campo-calculado"
+                    />
                 </div>
 
                 <div className="campo-container tooltip-container">
@@ -221,7 +252,13 @@ const CadastroAtivo = () => {
                     <option value="posfixado">Pós-fixado</option>
                     <option value="hibrido">Híbrido</option>
                     </select>
-                    <div className="tooltip tooltip-right">💡 O nome do ativo ajuda a identificar sua categoria e emissor.</div>
+                    <div className="tooltip tooltip-right">
+                        💡 Escolha como os juros do ativo são aplicados: 
+                        <strong> Prefixado</strong> (taxa fixa), 
+                        <strong> Pós-fixado</strong> (varia conforme um índice), ou 
+                        <strong> Híbrido</strong> (parte fixa + parte indexada).
+                    </div>
+
                 </div>
 
                 {(formData.tipo_juros === 'posfixado' || formData.tipo_juros === 'hibrido') && (
@@ -285,7 +322,10 @@ const CadastroAtivo = () => {
                     onChange={handleChange} 
                     value={formData.data_emissao}
                     />
-                    <div className="tooltip tooltip-right">💡 O nome do ativo ajuda a identificar sua categoria e emissor.</div>
+                    <div className="tooltip tooltip-right">
+                        💡 Data em que o ativo foi emitido. 
+                        É a referência inicial para cálculo de rendimento e prazos.
+                    </div>
                 </div>
 
                 <div className="campo-container tooltip-container">
@@ -298,7 +338,10 @@ const CadastroAtivo = () => {
                     onChange={handleChange} 
                     value={formData.data_vencimento}
                     />
-                    <div className="tooltip tooltip-right">💡 O nome do ativo ajuda a identificar sua categoria e emissor.</div>
+                    <div className="tooltip tooltip-right">
+                        💡 Data em que o ativo vence. 
+                        Após essa data, o valor investido é devolvido e o rendimento total é encerrado.
+                    </div>
                 </div>
 
                 <div className="campo-container tooltip-container">
@@ -307,7 +350,11 @@ const CadastroAtivo = () => {
                     <option value="diaria">Diária</option>
                     <option value="apos_vencimento">Após Vencimento</option>
                     </select>
-                    <div className="tooltip tooltip-right">💡 O nome do ativo ajuda a identificar sua categoria e emissor.</div>
+                    <div className="tooltip tooltip-right">
+                        💡 Define quando você pode resgatar seu investimento: 
+                        <strong> Diária</strong> permite saques antes do vencimento, 
+                        enquanto <strong> Após Vencimento</strong> exige esperar até o final do prazo.
+                    </div>
                 </div>
 
                <div className="checkbox-container tooltip-container">
@@ -319,7 +366,9 @@ const CadastroAtivo = () => {
                             checked={formData.possuiImposto}
                         /> Possui Imposto
                     </label>
-                    <div className="tooltip tooltip-right">💡 O nome do ativo ajuda a identificar sua categoria e emissor.</div>
+                    <div className="tooltip tooltip-right">
+                        💡 Marque se o ativo está sujeito à tributação. Isso impacta o cálculo do rendimento líquido.
+                    </div>
                 </div>
 
                 {formData.possuiImposto && (
@@ -344,8 +393,8 @@ const CadastroAtivo = () => {
                     <button type="submit" className="cadastro-btn">Cadastrar</button>
                     <button className="listar-ativos-btn" onClick={handleListarAtivos}>Listar Ativos</button>
                 </div>
+                <div ref={formEndRef}></div>
                 </form>
-
             </div>
         </section>
     );
