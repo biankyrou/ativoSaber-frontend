@@ -3,6 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { listarAtivos, deletarAtivo } from '../../services/api';
 import setaEsquerda from '../../assets/seta-esquerda.png'; 
 import './index.css';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
 
 const ListaAtivos = () => {
     const [ativos, setAtivos] = useState([]);
@@ -31,15 +35,45 @@ const ListaAtivos = () => {
     }, []);
 
     const handleDelete = async (id) => {
-        if (window.confirm("Tem certeza que deseja excluir este ativo?")) {
-            try {
-                await deletarAtivo(id);
-                setAtivos(ativos.filter(ativo => ativo.id !== id));
-            } catch (err) {
-                alert("Erro ao excluir ativo");
-                console.error("Erro:", err);
+        MySwal.fire({
+            text: "Tem certeza que deseja excluir este ativo?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3E846B',  
+            cancelButtonColor: '#e77368',   
+            confirmButtonText: 'Sim, excluir!',
+            cancelButtonText: 'Cancelar',
+            background: '#fefefe',
+            color: '#333',
+            customClass: {
+                popup: 'custom-font',          
+                title: 'custom-font',          
+                htmlContainer: 'custom-font',  
+                confirmButton: 'custom-font',  
+                cancelButton: 'custom-font'    
             }
-        }
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    await deletarAtivo(id);
+                    setAtivos(ativos.filter(ativo => ativo.id !== id));
+                    MySwal.fire({
+                        title: 'Excluído!',
+                        text: 'O ativo foi excluído com sucesso.',
+                        icon: 'success',
+                        confirmButtonColor: '#3E846B',
+                    });
+                } catch (err) {
+                    MySwal.fire({
+                        title: 'Erro!',
+                        text: 'Erro ao excluir o ativo.',
+                        icon: 'error',
+                        confirmButtonColor: '#e77368',
+                    });
+                    console.error("Erro:", err);
+                    }
+                }
+            });
     };
 
     if (loading) return <p>Carregando ativos...</p>;
@@ -62,7 +96,7 @@ const ListaAtivos = () => {
                         {ativos.map((ativo) => (
                             <li key={ativo.id}>
                                 <div className="ativo-info">
-                                    <strong>{ativo.nome}</strong> - {ativo.tipo} - {ativo.valor_unitario} BRL
+                                    <strong>{ativo.nome}</strong> - {ativo.tipo} - R${ativo.valor_investido}
                                 </div>
                                 <div className="button-group">
                                     <Link 

@@ -7,6 +7,7 @@ import ListarAtivos from './pages/DashboardAtivo/index.js';
 import CadastroUsuario from './pages/CadastroUsuario/index.js';
 import Login from './pages/Login/index.js';
 import AtivoDetalhado from './pages/AtivoDetalhado/index.js';
+import Roadmap from './pages/Roadmap/index.js'; // ou './components/roadmap/roadmap.js'
 
 import { AuthProvider } from './contexts/AuthContext.js';
 import { useAuth } from './contexts/AuthContext';
@@ -24,6 +25,7 @@ function App() {
         <Header /> {/* Header sempre visível */}
         <Routes>
           <Route path="/" element={<PageInicial />} />
+          <Route path="/roadmap" element={<Roadmap />} />
           <Route path="/cadastro-ativo" element={<PrivateRoute element={<CadastroAtivo />} />} />
           <Route path="/listar-ativos" element={<PrivateRoute element={<ListarAtivos />} />} />
           <Route path="/register" element={<CadastroUsuario />} />

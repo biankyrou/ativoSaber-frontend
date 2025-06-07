@@ -3,6 +3,10 @@ import axios from 'axios';
 import './index.css';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext'; 
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
 
 const LoginUsuario = () => {
   const [email, setEmail] = useState('');
@@ -39,8 +43,18 @@ const LoginUsuario = () => {
 
       navigate('/');
     } catch (error) {
-      setMensagem('Erro ao fazer login. Verifique suas credenciais.');
-      console.error(error);
+      MySwal.fire({
+          toast: true,
+          position: 'top-end',
+          icon: 'error',  
+          title: 'Erro ao fazer login. Verifique suas credenciais.',
+          showConfirmButton: false,
+          timer: 4000,
+          timerProgressBar: true,
+          background: '#d6e7d1',  
+          color: '#17631b',       
+          iconColor: '#3E846B',   
+          });
     }
   };
 

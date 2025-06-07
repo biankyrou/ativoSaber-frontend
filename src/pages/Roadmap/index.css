@@ -1,0 +1,447 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+/* -- VARIÁVEIS DE ESTILO (Reajustadas para Tamanho Menor) -- */
+:root {
+  --primary-green: #28a745;
+  --light-green: #5DA479;
+  --card-bg-light: #edf2ed;
+  --card-border: #a5d6a7;
+  --connector-color: #016b0225;
+  --connector-fill: #123512;
+  --active-greenv: #83d2a4;
+  --active-card-bg: #d7edd5;
+  --text-dark: #333;
+  --text-medium: #555;
+  --text-light: #777;
+  --shadow-subtle: rgba(0, 0, 0, 0.03); /* Sombra ainda mais leve */
+  --shadow-normal: rgba(0, 0, 0, 0.07);
+  --shadow-strong: rgba(0, 0, 0, 0.12);
+  --border-radius-main: 12px; /* Menos arredondado */
+  --border-radius-card: 8px; /* Menos arredondado */
+}
+
+/* ------------------------------------------- */
+
+/* Base e Tipografia */
+body {
+  font-family: 'Nunito', sans-serif;
+  line-height: 1.5; /* Linha mais compacta */
+  color: var(--text-dark);
+  font-size: 0.99em; /* Fonte base um pouco menor */
+}
+
+/* Wrapper da Página (Background) */
+.roadmap-page-wrapper.roadmap-sh-style {
+  background-color: var(--light-green);
+  min-height: 100vh;
+  padding-top: 180px; 
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+/* Container Principal do Roadmap (White Card Wrapper) */
+.roadmap-container.roadmap-sh-container {
+  max-width: 1200px; /* Largura total do container reduzida */
+  width: 90%; /* Se ajusta em telas menores */
+  background-color: #dceedd;
+  border-radius: var(--border-radius-main);
+  box-shadow: 0 4px 15px var(--shadow-normal); /* Sombra reduzida */
+  color: var(--text-dark);
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 700px; 
+  overflow: auto; 
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-green) #f1f1f1;
+}
+
+/* Títulos e Introdução */
+.roadmap-title {
+  color: var(--primary-green);
+  text-align: center;
+  margin-bottom: 10px; /* Espaço reduzido */
+  margin-top: 30px; /* Padding top reduzido */
+  font-size: 2.2em; /* Tamanho do título reduzido */
+  max-width: 80%; /* Limita a largura do título */
+}
+
+.roadmap-intro {
+  font-size: 0.95em; /* Tamanho da intro reduzido */
+  line-height: 1.5;
+  margin-bottom: 40px; /* Espaço reduzido */
+  color: var(--text-medium);
+  text-align: center;
+  max-width: 75%; /* Limita a largura da introdução */
+}
+
+/* Container Flexível para Cards e Sidebar */
+.roadmap-content-flex {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Espaço entre main content e sidebar reduzido */
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 5px 80px 40px 90px; /* Padding reduzido */
+  box-sizing: border-box;
+}
+
+/* Conteúdo Principal do Roadmap (Cards) */
+.roadmap-main-content {
+  flex: 1;
+  max-width: 380px; /* Largura ideal para a coluna de cards reduzida */
+  box-sizing: border-box;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* Grid de Cards e Conectores */
+.roadmap-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px; /* Espaçamento entre cards e conectores reduzido */
+  justify-items: center;
+  position: relative;
+}
+
+/* Conectores verticais */
+.roadmap-connector {
+  width: 3px; /* Mais fino */
+  height: 30px; /* Comprimento reduzido */
+  background-color: var(--connector-color);
+  box-shadow: none;
+  position: relative;
+}
+
+/* Animação para a linha (mantida) */
+.roadmap-connector::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: var(--connector-fill);
+  animation: fillLine 2s forwards ease-out;
+  animation-delay: var(--delay);
+}
+
+/* Estilos dos Nós/Cards do Roadmap */
+.roadmap-node-card {
+  background-color: var(--card-bg-light);
+  border: 1px solid var(--card-border);
+  border-radius: var(--border-radius-card);
+  padding: 15px 20px; /* Padding interno do card reduzido */
+  box-shadow: 0 1px 4px var(--shadow-subtle); /* Sombra mais sutil */
+  cursor: pointer;
+  transition: all 0.15s ease-in-out; /* Transição mais rápida */
+  width: 100%;
+  max-width: 450px; /* Largura ideal para cards individuais reduzida */
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Espaço entre ícone e título reduzido */
+  max-width: 450px;
+  max-height: 250px; /* Define um limite de altura para permitir rolagem */
+  overflow-y: auto; /* Ativa a rolagem interna vertical */
+  overflow-x: hidden; /* Evita rolagem lateral indesejada */
+}
+
+.roadmap-node-card:hover {
+  border-color: var(--primary-green);
+  box-shadow: 0 3px 8px var(--shadow-normal);
+  transform: translateY(-1px); /* Elevação sutil */
+}
+
+.roadmap-node-card.active {
+  background-color: var(--active-card-bg);
+  border-color: var(--active-greenv);
+  box-shadow: 0 4px 10px var(--shadow-strong);
+  transform: translateY(-1px);
+}
+
+.node-card-icon {
+  font-size: 1.6em; /* Ícone reduzido */
+  color: var(--primary-green);
+  flex-shrink: 0;
+}
+
+.node-card-title {
+  font-size: 1.25em; /* Título do card reduzido */
+  color: var(--text-dark);
+  font-weight: 600;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* Sidebar de Recursos */
+.resources-sidebar {
+  background-color: #ffffff;
+  border-radius: var(--border-radius-card);
+  box-shadow: 0 3px 12px var(--shadow-normal); /* Sombra reduzida */
+  padding: 20px; /* Padding interno da sidebar reduzido */
+  width: 420px; /* Largura fixa reduzida */
+  flex-shrink: 0;
+  position: sticky;
+  top: 100px; /* Ajuste para ficar um pouco abaixo do título/intro */
+  right: -350px; /* Escondida, ajustado para nova largura */
+  transition: right 0.3s ease-out, opacity 0.3s ease-out; /* Transição mais rápida */
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.resources-sidebar.active {
+  right: 0px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.close-sidebar-button {
+  position: absolute;
+  top: 8px; /* Ajustado */
+  right: 8px; /* Ajustado */
+  background: none;
+  border: none;
+  font-size: 1.2em; /* Tamanho do 'X' reduzido */
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.15s ease;
+}
+
+.close-sidebar-button:hover {
+  color: var(--text-dark);
+}
+
+.resources-sidebar h2 {
+  color: var(--primary-green);
+  margin-top: 0;
+  margin-bottom: 8px; /* Espaço reduzido */
+  font-size: 1.3em; /* Título da sidebar reduzido */
+  text-align: center;
+  font-weight: 600;
+}
+
+.resources-sidebar p {
+  line-height: 1.5;
+  margin-bottom: 12px; /* Espaço reduzido */
+  color: var(--text-medium);
+  font-size: 0.85em; /* Texto da sidebar reduzido */
+  text-align: left;
+}
+
+.resources-heading {
+  font-size: 1em; /* Título "Leia mais:" reduzido */
+  color: var(--text-dark);
+  margin-top: 15px; /* Margem reduzida */
+  margin-bottom: 8px; /* Margem reduzida */
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 4px; /* Padding reduzido */
+  text-align: left;
+  font-weight: 600;
+}
+
+.resources-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.resources-list li {
+  margin-bottom: 5px; /* Espaçamento reduzido */
+}
+
+.resources-list a {
+  display: flex;
+  align-items: center;
+  color: #007bff;
+  text-decoration: none;
+  font-size: 0.8em; /* Tamanho dos links reduzido */
+  transition: color 0.15s ease;
+}
+
+.resources-list a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+.resource-type {
+  font-size: 0.9em; /* Tamanho dos ícones de recurso reduzido */
+  margin-right: 5px; /* Margem reduzida */
+  flex-shrink: 0;
+}
+
+.asset-fields-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 12px;
+  line-height: 1.4; /* Um pouco mais espaçado para leitura confortável */
+  font-size: 0.85em; /* Leve aumento para melhorar legibilidade */
+  color: var(--text-dark); /* Texto mais escuro para contraste */
+}
+
+.asset-fields-list li {
+  background-color: var(--card-bg-light); /* Usar background mais claro e neutro */
+  margin-bottom: 6px; /* Espaçamento um pouco maior para separar os itens */
+  padding: 8px 12px; /* Padding mais confortável */
+  border-left: 3px solid var(--primary-green); /* Borda um pouco mais grossa */
+  border-radius: 4px; /* Arredondamento suave */
+  box-shadow: 0 1px 3px var(--shadow-subtle); /* Sombra sutil para dar leve profundidade */
+  transition: background-color 0.3s ease;
+}
+
+.asset-fields-list li strong {
+  color: var(--primary-green);
+}
+
+/* Opcional: efeito hover leve para itens */
+.asset-fields-list li:hover {
+  background-color: var(--active-card-bg);
+  cursor: default;
+}
+
+
+/* Botões da sidebar */
+.details-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px; /* Espaçamento entre os botões reduzido */
+  margin-top: auto;
+  padding-top: 10px; /* Padding reduzido */
+  border-top: 1px solid #f0f0f0;
+}
+
+.action-button {
+  background-color: #f0f0f0;
+  color: var(--text-dark);
+  border: 1px solid #e0e0e0;
+  border-radius: 4px; /* Menos arredondado */
+  padding: 7px 12px; /* Padding reduzido */
+  font-size: 0.8em; /* Fonte reduzida */
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease, border-color 0.15s ease;
+  min-width: 80px; /* Largura mínima reduzida */
+  text-align: center;
+}
+
+.action-button:hover {
+  background-color: #e8e8e8;
+  border-color: #d0d0d0;
+  transform: translateY(0); /* Remove elevação no hover para botões pequenos */
+}
+
+.action-button.primary-action {
+  background-color: var(--primary-green);
+  color: white;
+  border-color: var(--primary-green);
+  font-size: 0.85em; /* Fonte reduzida */
+  padding: 9px 16px; /* Padding reduzido */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Sombra mais sutil */
+}
+
+.action-button.primary-action:hover {
+  background-color: #218838;
+  border-color: #218838;
+  transform: translateY(0); /* Remove elevação no hover para botões pequenos */
+}
+
+
+/* Responsividade (Ajustes para tamanhos ainda menores) */
+@media (min-width: 1024px) {
+  .roadmap-content-flex {
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+  }
+}
+
+@media (max-width: 1023px) {
+  .roadmap-container.roadmap-sh-container {
+    padding: 0 10px; /* Padding lateral reduzido */
+  }
+  .roadmap-title {
+    font-size: 1.8em; /* Tamanho reduzido */
+    margin-top: 25px;
+    max-width: 95%;
+  }
+  .roadmap-intro {
+    font-size: 0.85em; /* Tamanho reduzido */
+    margin-bottom: 25px;
+    max-width: 90%;
+  }
+  .roadmap-content-flex {
+    padding: 0 0 15px 0; /* Padding reduzido */
+  }
+
+  .roadmap-main-content {
+    margin-bottom: 20px; /* Espaço reduzido */
+  }
+
+  .roadmap-node-card {
+    padding: 12px 15px; /* Padding reduzido */
+  }
+
+  .resources-sidebar {
+    padding: 15px; /* Padding reduzido */
+  }
+
+  .close-sidebar-button {
+    font-size: 1.8em; /* Tamanho ajustado para mobile */
+    top: 10px;
+    right: 10px;
+  }
+
+  .resources-sidebar h2 {
+    font-size: 1.4em; /* Tamanho reduzido */
+  }
+  .resources-sidebar p, .resources-sidebar ul li {
+    font-size: 0.8em; /* Tamanho reduzido */
+  }
+}
+
+@media (max-width: 580px) {
+  .roadmap-title {
+    font-size: 1.5em;
+  }
+  .roadmap-intro {
+    font-size: 0.8em;
+  }
+  .roadmap-node-card {
+    padding: 10px 12px;
+  }
+  .node-card-icon {
+    font-size: 1.4em;
+  }
+  .node-card-title {
+    font-size: 1.1em;
+  }
+  .resources-sidebar {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .roadmap-title {
+    font-size: 1.3em;
+  }
+  .roadmap-node-card {
+    padding: 8px 10px;
+  }
+  .node-card-icon {
+    font-size: 1.2em;
+  }
+  .node-card-title {
+    font-size: 0.95em;
+  }
+}
