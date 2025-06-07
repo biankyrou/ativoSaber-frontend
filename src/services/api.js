@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000/api/';
+const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000/api';
 
 const getAuthHeaders = () => {
     const token = localStorage.getItem('access_token');
@@ -9,7 +9,7 @@ const getAuthHeaders = () => {
 
 export const getAtivo = async (id) => {
     try {
-        const response = await axios.get(`${API_URL}ativos/${id}/`, {
+        const response = await axios.get(`${API_URL}/ativos/${id}/`, {
             headers: {
                 ...getAuthHeaders(),
                 'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ export const getAtivo = async (id) => {
 
 export const listarAtivos = async () => {
     try {
-        const response = await axios.get(`${API_URL}ativos/`, {
+        const response = await axios.get(`${API_URL}/ativos/`, {
             headers: {
                 ...getAuthHeaders(),
                 'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export const listarAtivos = async () => {
 
 export const criarAtivo = async (ativoData) => {
     try {
-        const response = await axios.post(`${API_URL}ativos/criar/`, ativoData, {
+        const response = await axios.post(`${API_URL}/ativos/criar/`, ativoData, {
             headers: {
                 ...getAuthHeaders(),
                 'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export const criarAtivo = async (ativoData) => {
 
 export const deletarAtivo = async (id) => {
     try {
-        const response = await axios.delete(`${API_URL}ativos/deletar/${id}/`, {
+        const response = await axios.delete(`${API_URL}/ativos/deletar/${id}/`, {
             headers: getAuthHeaders(),
         });
         console.log("Ativo deletado com sucesso.");
