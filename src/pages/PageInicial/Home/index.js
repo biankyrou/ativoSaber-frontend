@@ -14,8 +14,8 @@ const Home = () => {
                     <h2 className="home-subtitle">MERCADO FINANCEIRO | EDUCAÇÃO</h2>
                     <h1 className="home-title">Ativo Saber</h1>
                     <p className="home-description">
-                        Ativo Saber é uma plataforma interativa para cadastrar e gerenciar ativos financeiros 
-                        enquanto aprende sobre o mercado, simulando o funcionamento de um banco na prática.
+                        Ativo Saber é uma plataforma educativa para cadastrar e gerenciar ativos financeiros 
+                        enquanto aprende sobre o mercado financeiro, simulando o funcionamento de um banco na prática.
                     </p>
 
                     {user && (
