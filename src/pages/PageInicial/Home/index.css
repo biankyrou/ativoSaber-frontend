@@ -27,20 +27,22 @@
     max-width: 600px;
 }
 
-/* Imagem à direita */
 .home-imagem {
-    width: 400px; /* Define um tamanho adequado */
+    width: 30%;
+    max-width: 28%; /* Evita que ultrapasse o limite */
+    box-sizing: border-box;
 }
 
 .home-imagem img {
     width: 100%;
     height: auto;
+    display: block;
 }
 
 /* Estilos refinados para textos */
 .home-subtitle  {
     font-family: 'Nunito', sans-serif;
-    font-size: 16px; 
+    font-size: 14px; 
     font-weight: 100;
     color: white;
     text-align: left; 
@@ -48,7 +50,7 @@
 
 .home-title {
     font-family: 'Nunito', sans-serif;
-    font-size: 65px; 
+    font-size: 60px; 
     font-weight: 300;
     color: white;
     text-align: left;
@@ -58,7 +60,7 @@
 
 .home-description {
     font-family: 'Nunito', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 10;
     color: white;
     text-align: left;

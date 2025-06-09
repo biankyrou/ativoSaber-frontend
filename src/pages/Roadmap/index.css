@@ -34,7 +34,7 @@ body {
 .roadmap-page-wrapper.roadmap-sh-style {
   background-color: var(--light-green);
   min-height: 100vh;
-  padding-top: 180px; 
+  padding-top: 160px; 
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -44,7 +44,7 @@ body {
 /* Container Principal do Roadmap (White Card Wrapper) */
 .roadmap-container.roadmap-sh-container {
   max-width: 1200px; /* Largura total do container reduzida */
-  width: 90%; /* Se ajusta em telas menores */
+  width: 80%; /* Se ajusta em telas menores */
   background-color: #dceedd;
   border-radius: var(--border-radius-main);
   box-shadow: 0 4px 15px var(--shadow-normal); /* Sombra reduzida */
@@ -55,8 +55,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  height: 700px; 
+  height: 650px; 
   overflow: auto; 
   scrollbar-width: thin;
   scrollbar-color: var(--primary-green) #f1f1f1;

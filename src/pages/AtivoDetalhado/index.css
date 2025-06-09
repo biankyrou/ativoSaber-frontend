@@ -1,12 +1,27 @@
 .ativo-detalhado {
-    padding: 0 12rem; /* Reduzi o padding para melhor distribuição dos elementos */
     font-family: 'Nunito', sans-serif;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 2rem;
+    position: relative; 
     background-color: #7FA68B; 
-    height: 100vh;
+    min-height: 100vh;
+}
+
+.conteudo-centralizado {
+  display: flex;
+  gap: 2rem;
+  /* flex-wrap: wrap; */  /* comentar ou remover para forçar em linha */
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+
+
+.lado-direito {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
 .ativo-card {
@@ -14,22 +29,82 @@
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
-    width: 22%; /* Aumento para melhorar o layout */
+    width: 20%; /* Aumento para melhorar o layout */
     text-align: left;
+    margin-top: 100px;
 }
 
-/* Melhorias na área de projeção de rendimento */
-.grafico-rendimento {
-    width: 56%; /* Aumento para maior destaque */
-    background: #CBE1D4;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column; /* Organiza título e gráfico */
-    align-items: center;
-    justify-content: center;
+.grafico-rendimento, .resgate-container {
+  background-color: #CBE1D4;
+  padding: 1.4rem;
+  border-radius: 10px;
+  box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
 }
+
+.resgate-container {
+  padding-top: 6px;
+}
+
+.grafico-rendimento {
+  margin-top: 100px;
+  width: 95%;
+}
+
+.resgate-form-resultado {
+    display: flex;
+    gap: 1.5rem; /* Espaçamento entre o formulário e o resultado */
+    align-items: flex-start; /* Alinha os itens ao topo, pode ajustar conforme preferir */
+    flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+}
+
+.resgate-form {
+    flex: 1; /* Permite que o formulário ocupe o espaço disponível */
+    min-width: 250px; /* Garante uma largura mínima para o formulário */
+}
+
+.resultado-resgate {
+    /* Estilos para o card de resultado */
+    background-color: #4a8c27;
+    color: #CBE1D4;
+    padding-left: 7px;
+    border-radius: 12px;
+    font-weight: 700;
+    margin-top: 30px;
+    box-shadow: inset 0 0 10px rgba(58, 107, 32, 0.5); /* Sombra mais suave */
+    flex: 1; /* Permite que o resultado ocupe o espaço disponível */
+    min-width: 250px; /* Garante uma largura mínima para o resultado */
+    display: flex; /* Para alinhar o conteúdo interno se precisar */
+    flex-direction: column; /* Conteúdo em coluna */
+    justify-content: center; /* Centraliza verticalmente o texto se o card for maior */
+}
+
+.resultado-resgate h4 {
+    padding: 20px 25px 19px 10px;
+    margin-top: 0; /* Already good to ensure no top margin */
+    margin-bottom: 0rem; /* This is the one you need to reduce */
+    font-size: 1.1rem; /* You might want to adjust this as well to match overall reduction */
+}
+
+.resultado-resgate p {
+    margin-bottom: 0.6rem; 
+    margin-top: 0rem;
+    padding-left: 10px;
+    font-size: 1rem;
+}
+
+.resgate-container input[type="date"] {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  width: auto;
+  max-width: 200px;
+  border: 1.5px solid #17631b;
+  font-size: 1rem;
+  font-family: 'Nunito', sans-serif;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
 
 /* Estilizando título da projeção */
 .grafico-rendimento h2 {
@@ -63,24 +138,12 @@
     transform: scale(1.1);
 }
 
-/* Container do resgate */
-.resgate-container {
-  width: 20%; /* Mesma largura do ativo-card para alinhar no layout flex */
-  background: #CBE1D4;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  color: #17631b;
-}
-
 /* Título da seção */
 .resgate-container h3 {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 1rem;
+  color: #17631b;
 }
 
 /* Label com input */
@@ -90,17 +153,6 @@
   display: flex;
   flex-direction: column;
   color: #17631b;
-}
-
-.resgate-container input[type="date"] {
-  margin-top: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
-  border: 1.5px solid #17631b;
-  font-size: 1rem;
-  font-family: 'Nunito', sans-serif;
-  outline: none;
-  transition: border-color 0.3s ease;
 }
 
 .resgate-container input[type="date"]:focus {
@@ -116,6 +168,7 @@
   font-weight: 700;
   font-size: 1rem;
   border-radius: 12px;
+  margin-top: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -127,17 +180,6 @@
 .resgate-container button:disabled {
   background-color: #a2bfa0;
   cursor: not-allowed;
-}
-
-/* Resultado do resgate */
-.resultado-resgate {
-  background-color: #4a8c27;
-  color: #CBE1D4;
-  padding: 0.3rem 1.5rem;
-  border-radius: 12px;
-  font-weight: 700;
-  font-size: 1rem;
-  box-shadow: inset 0 0 10px #3a6b20;
 }
 
 /* Mensagem de erro */

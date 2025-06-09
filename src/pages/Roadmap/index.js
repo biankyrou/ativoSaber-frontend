@@ -73,8 +73,7 @@ const Roadmap = () => {
       'Alguns investimentos oferecem isenção de impostos, e isso não é por acaso. A isenção é uma decisão do governo, que busca incentivar determinados setores da economia, como o agronegócio (CRA e LCA) e o mercado imobiliário (CRI e LCI). Títulos públicos, CDBs e debêntures comuns, por outro lado, são tributados pelo Imposto de Renda sobre os rendimentos. Essa isenção, no entanto, depende do tipo de investidor e da natureza da operação. Em geral, ela se aplica exclusivamente a pessoas físicas. Se o investidor for uma pessoa jurídica, normalmente não há isenção — mesmo em ativos que são livres de impostos para pessoas físicas. Entender quando e por que um ativo é isento ajuda a comparar melhor as opções e escolher de forma mais eficiente.',
     icon: '📜',
     resources: [
-      { type: 'video', title: 'Risco, Liquidez e Rentabilidade, o Tripé dos Investimentos.', link: 'https://www.youtube.com/watch?v=nbAaoDfSa1U&ab_channel=AmurCapital' },
-      { type: 'video', title: 'Triângulo de Nigro: Rentabilidade, Risco e Liquidez', link: 'https://www.youtube.com/watch?v=Chlp4E8YQL0&ab_channel=OPrimoRico' },
+      { type: 'article', title: 'Tributação de Renda Fixa.', link: 'https://ajuda.modalmais.com.br/hc/pt-br/articles/1500000901041-Tributa%C3%A7%C3%A3o-de-Renda-Fixa' },
     ],
   },
     {

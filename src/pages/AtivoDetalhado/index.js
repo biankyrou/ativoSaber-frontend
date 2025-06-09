@@ -132,69 +132,76 @@ const AtivoDetalhado = () => {
 
     return (
         <section className="ativo-detalhado">
-            <div className="ativo-card">
-                <h1>{ativo.nome}</h1>
-                <p><strong>Tipo:</strong> {ativo.tipo}</p>
-                <p><strong>Emissor:</strong> {ativo.emissor}</p>
-                <p><strong>Tipo de Negociação:</strong> {ativo.tipo_negociacao}</p>
-                <p><strong>Valor Unitário:</strong> R$ {Number(ativo.valor_unitario).toFixed(2)}</p>
-                <p><strong>Quantidade:</strong> {Number(ativo.quantidade)}</p>
-                <p><strong>Valor Investido:</strong> R$ {Number(ativo.valor_investido).toFixed(2)}</p>
-                <p><strong>Taxa de Rentabilidade:</strong> {formatarTaxaRentabilidade(ativo)}</p>
-                <p><strong>Tipo de Juros:</strong> {ativo.tipo_juros}</p>
-                <p><strong>Rendimento Esperado:</strong> R$ {Number(ativo.rendimento_esperado).toFixed(2)}</p>
-                <p><strong>Liquidez:</strong> {ativo.liquidez}</p>
-                <p><strong>Data de Emissão:</strong> {new Date(ativo.data_emissao).toLocaleDateString()}</p>
-                <p><strong>Data de Vencimento:</strong> {new Date(ativo.data_vencimento).toLocaleDateString()}</p>
-                <p><strong>Possui Imposto:</strong> {ativo.possuiImposto ? "Sim" : "Não"}
-                    {ativo.possuiImposto && (
-                        <> - Alíquota: {ativo.aliquotaImposto}%</>
-                    )}
-                </p>
-            </div>
+             <div className="conteudo-centralizado">
+                <div className="ativo-card">
+                    <h1>{ativo.nome}</h1>
+                    <p><strong>Tipo:</strong> {ativo.tipo}</p>
+                    <p><strong>Emissor:</strong> {ativo.emissor}</p>
+                    <p><strong>Tipo de Negociação:</strong> {ativo.tipo_negociacao}</p>
+                    <p><strong>Valor Unitário:</strong> R$ {Number(ativo.valor_unitario).toFixed(2)}</p>
+                    <p><strong>Quantidade:</strong> {Number(ativo.quantidade)}</p>
+                    <p><strong>Valor Investido:</strong> R$ {Number(ativo.valor_investido).toFixed(2)}</p>
+                    <p><strong>Taxa de Rentabilidade:</strong> {formatarTaxaRentabilidade(ativo)}</p>
+                    <p><strong>Tipo de Juros:</strong> {ativo.tipo_juros}</p>
+                    <p><strong>Rendimento Esperado:</strong> R$ {Number(ativo.rendimento_esperado).toFixed(2)}</p>
+                    <p><strong>Liquidez:</strong> {ativo.liquidez}</p>
+                    <p><strong>Data de Emissão:</strong> {new Date(ativo.data_emissao).toLocaleDateString()}</p>
+                    <p><strong>Data de Vencimento:</strong> {new Date(ativo.data_vencimento).toLocaleDateString()}</p>
+                    <p><strong>Possui Imposto:</strong> {ativo.possuiImposto ? "Sim" : "Não"}
+                        {ativo.possuiImposto && (
+                            <> - Alíquota: {ativo.aliquotaImposto}%</>
+                        )}
+                    </p>
+                </div>
+                <div className="lado-direito">
+                    <div className="grafico-rendimento">
+                        <h2>Projeção de Rendimento</h2>
+                        <ResponsiveContainer width="100%" height={300}>
+                            <LineChart data={rendimento}>
+                                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                                <XAxis dataKey="mes" />
+                                <YAxis />
+                                <Tooltip formatter={(value) => `R$ ${value}`} />
+                                <Line type="monotone" dataKey="valor" stroke="#8884d8" strokeWidth={2} />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
 
-            <div className="grafico-rendimento">
-                <h2>Projeção de Rendimento</h2>
-                <ResponsiveContainer width="100%" height={300}>
-                    <LineChart data={rendimento}>
-                        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                        <XAxis dataKey="mes" />
-                        <YAxis />
-                        <Tooltip formatter={(value) => `R$ ${value}`} />
-                        <Line type="monotone" dataKey="valor" stroke="#8884d8" strokeWidth={2} />
-                    </LineChart>
-                </ResponsiveContainer>
-            </div>
+                    {ativo.liquidez === 'diaria' && (
+                        <div className="resgate-container">
+                            <h3>Solicitar Resgate</h3>
+                            <div className="resgate-form-resultado">
+                                <div className="resgate-form">
+                                        <label>
+                                            Data do Resgate:
+                                            <input 
+                                                type="date" 
+                                                value={dataResgate} 
+                                                onChange={(e) => setDataResgate(e.target.value)} 
+                                                min={ativo.data_emissao} 
+                                                max={ativo.data_vencimento} 
+                                                />
+                                        </label>
+                                        <button onClick={handleSolicitarResgate} disabled={loadingResgate}>
+                                            {loadingResgate ? 'Calculando...' : 'Solicitar Resgate'}
+                                        </button>
+                                    </div>
+                                    {resultadoResgate && (
+                                        <div className="resultado-resgate">
+                                            <h4>Resultado do Resgate</h4>
+                                            <p>Valor Acumulado: R$ {resultadoResgate.valor_acumulado?.toFixed(2)}</p>
+                                            <p>Dias Corridos: {resultadoResgate.dias_corridos}</p>
+                                            <p>Rendimento: R$ {resultadoResgate.rendimento?.toFixed(2)}</p>
+                                        </div>
+                                    )}
 
-            {ativo.liquidez === 'diaria' && (
-                <div className="resgate-container">
-                    <h3>Solicitar Resgate</h3>
-                    <label>
-                        Data do Resgate:
-                        <input 
-                            type="date" 
-                            value={dataResgate} 
-                            onChange={(e) => setDataResgate(e.target.value)} 
-                            min={ativo.data_emissao} 
-                            max={ativo.data_vencimento} 
-                            />
-                    </label>
-                    <button onClick={handleSolicitarResgate} disabled={loadingResgate}>
-                        {loadingResgate ? 'Calculando...' : 'Solicitar Resgate'}
-                    </button>
-
-                    {resultadoResgate && (
-                        <div className="resultado-resgate">
-                            <h4>Resultado do Resgate</h4>
-                            <p>Valor Acumulado: R$ {resultadoResgate.valor_acumulado?.toFixed(2)}</p>
-                            <p>Dias Corridos: {resultadoResgate.dias_corridos}</p>
-                            <p>Rendimento: R$ {resultadoResgate.rendimento?.toFixed(2)}</p>
+                                    {erroResgate && <p className="erro-resgate">{erroResgate}</p>}
+                               
+                            </div>
                         </div>
                     )}
-
-                    {erroResgate && <p className="erro-resgate">{erroResgate}</p>}
                 </div>
-            )}
+            </div>
 
             <button className="voltar-btn" onClick={() => navigate('/listar-ativos')}>
                 <img src={setaEsquerda} alt="Voltar" />
