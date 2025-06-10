@@ -9,7 +9,7 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContai
 import './index.css';
 
 const solicitarResgate = async (id, dataResgate) => {
-    const token = localStorage.getItem('access_token');  // <-- Buscando direto do localStorage
+    const token = localStorage.getItem('access_token');  
 
     if (!token) {
         throw new Error('Usuário não autenticado.');

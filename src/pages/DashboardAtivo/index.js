@@ -105,6 +105,12 @@ const ListaAtivos = () => {
                                     >
                                         Ver detalhes
                                     </Link>
+                                    <Link 
+                                        to={`/avaliar/${ativo.id}`} 
+                                        className="avaliar-btn"
+                                    >
+                                        Avaliar
+                                    </Link>
                                     <button 
                                         className="delete-btn" 
                                         onClick={() => handleDelete(ativo.id)}

@@ -4,7 +4,7 @@
 .lista-ativos {
     width: 100%;
     height: 100vh;
-    background-color: #5DA479; 
+    background-color: #5DA479;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,21 +15,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 900px;
-    background-color: #CBE1D4; 
-    padding: 12px 60px 30px 60px;
-    border-radius: 30px;
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 700px; /* Reduzindo a largura máxima do container */
+    background-color: #CBE1D4;
+    padding: 10px 40px 20px 40px; /* Reduzindo o padding interno */
+    border-radius: 20px; /* Diminuindo o border-radius */
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2); /* Ajustando a sombra */
     text-align: center;
 }
 
 /* Título */
 .lista-title {
     font-family: 'Nunito', sans-serif;
-    font-size: 32px;
+    font-size: 26px; /* Reduzindo o tamanho da fonte */
     font-weight: 700;
     color: #17631b;
-    margin-bottom: 40px;
+    margin-bottom: 30px; /* Reduzindo a margem inferior */
 }
 
 /* Estilização da lista */
@@ -42,83 +42,102 @@
 /* Cada item da lista agora tem bordas mais arredondadas */
 .lista-ativos li {
     font-family: 'Nunito', sans-serif;
-    font-size: 18px;
+    font-size: 16px; /* Reduzindo o tamanho da fonte */
     background-color: white;
-    padding: 15px;
-    border-radius: 15px; /* Bordas mais arredondadas */
+    padding: 10px; /* Reduzindo o padding */
+    border-radius: 10px; /* Diminuindo o border-radius */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.15);
+    margin-bottom: 8px; /* Reduzindo a margem inferior */
+    box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.15); /* Ajustando a sombra */
 }
 
 .ativo-info {
-    margin-right: 12px; /* Define um espaçamento entre o texto e o grupo de botões */
+    margin-right: 10px; /* Reduzindo o espaçamento */
 }
 
 /* Contêiner para os botões de ação */
 .button-group {
     display: flex;
-    gap: 10px; /* Espaço entre os botões */
+    gap: 8px; /* Reduzindo o espaço entre os botões */
 }
 
 /* Ajusta os botões para o layout lado a lado */
 .detalhes-btn, .delete-btn {
     flex: 1;
-    white-space: nowrap; 
-    max-width: 120px; /* Limita o tamanho dos botões */
+    white-space: nowrap;
+    max-width: 100px; /* Limita o tamanho dos botões */
     text-align: center;
 }
 
 /* Botão de exclusão menor e mais compacto */
 .delete-btn {
     font-family: 'Nunito', sans-serif;
-    padding: 6px 12px; /* Botão mais compacto */
-    font-size: 16px;
+    padding: 5px 10px; /* Botão mais compacto */
+    font-size: 14px; /* Reduzindo o tamanho da fonte */
     font-weight: bold;
-    border-radius: 20px; /* Bordas arredondadas para suavizar o design */
-    background-color: #e77368; /* Vermelho claro */
+    border-radius: 15px; /* Diminuindo o border-radius */
+    background-color: #e77368;
     color: white;
-    border: 2px solid #e77368;
+    border: 1px solid #e77368; /* Ajustando a borda */
     cursor: pointer;
     transition: 0.3s;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.15); /* Ajustando a sombra */
 }
 
 .delete-btn:hover {
-    background-color: #e44444; /* Vermelho mais intenso no hover */
-    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.3);
+    background-color: #e44444;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
 }
 
 .detalhes-btn {
     font-family: 'Nunito', sans-serif;
-    padding: 6px 12px; 
-    font-size: 16px;
+    padding: 5px 10px; /* Botão mais compacto */
+    font-size: 14px; /* Reduzindo o tamanho da fonte */
     font-weight: bold;
-    border-radius: 20px; 
-    background-color: #3E846B; 
+    border-radius: 15px; /* Diminuindo o border-radius */
+    background-color: #3E846B;
     color: white;
-    border: 2px solid #3E846B;
+    border: 1px solid #3E846B; /* Ajustando a borda */
     cursor: pointer;
     transition: 0.3s;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.15); /* Ajustando a sombra */
     text-decoration: none;
 }
 
 .detalhes-btn:hover {
     background-color: #2e7d32;
     border-color: #1b5e20;
-    box-shadow: 4px 4px 22px rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .nenhum-ativo {
-  font-size: 1.2rem;
-  color: #555;
-  margin-top: 20px;
-  text-align: center;
+    font-size: 1rem; /* Reduzindo o tamanho da fonte */
+    color: #555;
+    margin-top: 15px; /* Reduzindo a margem */
+    text-align: center;
 }
 
 .custom-font {
-  font-family: 'Nunito', sans-serif !important;
+    font-family: 'Nunito', sans-serif !important;
+}
+
+.avaliar-btn {
+    background-color: #ebbd19;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+    padding: 5px 10px; /* Botão mais compacto */
+    font-size: 14px; /* Reduzindo o tamanho da fonte */
+    font-weight: bold;
+    border-radius: 15px; /* Diminuindo o border-radius */
+    border: 1px solid #ebbd19; /* Ajustando a borda */
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 1px 1px 6px rgba(233, 235, 225, 0.15); /* Ajustando a sombra */
+    text-decoration: none;
+}
+
+.avaliar-btn:hover {
+    background-color: #e2b219;
 }

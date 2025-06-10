@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+.avaliador-page-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    margin-top: 50px;
+    background-color: #5DA479;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 15px 25px 15px;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+}
+
+.avaliador-quiz-container {
+    background-color: #CBE1D4;
+    border-radius: 22px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
+    max-width: 480px;
+    width: 100%;
+    padding: 22px 30px 30px 30px;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.avaliador-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #17631b;
+    margin-bottom: 22px;
+}
+
+.educativo-texto-av {
+    font-size: 14px;
+    font-weight: 700;
+    color: #17631b;
+    margin-top: 0;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.quiz-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    text-align: left;
+}
+
+.campo-container-av {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.campo-container-av label {
+    font-weight: 700;
+    font-size: 14px;
+    color: #2e7d32;
+    user-select: none;
+}
+
+.campo-container-av select {
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    padding: 8px 10px;
+    border: 2px solid #2e7d32;
+    border-radius: 8px;
+    background-color: white;
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.campo-container-av select:focus {
+    outline: none;
+    border-color: #17631b;
+    box-shadow: 0 0 4px #17631b;
+}
+
+.checkbox-container-av {
+    margin-top: 8px;
+    font-weight: 700;
+    color: #2e7d32;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+}
+
+.checkbox-container-av input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 2px solid #2e7d32;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.checkbox-container-av input[type="checkbox"]:checked {
+    background-color: #17631b;
+    border-color: #17631b;
+}
+
+.button-container-av {
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
+}
+
+.avaliar-btn-av {
+    font-family: 'Nunito', sans-serif;
+    padding: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 30px;
+    background-color: #3E846B;
+    color: white;
+    border: 3px solid rgb(50, 120, 66);
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 210px;
+    text-align: center;
+}
+
+.avaliar-btn-av:hover {
+    background-color: #3E846B;
+    border-color: #1b5e20;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+.avaliar-btn-av:disabled {
+    background-color: #3E846B;
+    border-color: #8aa38e;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.avaliar-btn-av:hover:not(:disabled) {
+    background-color: #3E846B;
+    border-color: #3E846B;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+}
+
+.resultado-container-av {
+    margin-top: 24px;
+    padding: 16px;
+    background-color: #e6f0e7;
+    border-radius: 16px;
+    box-shadow: inset 1.5px 1.5px 6px rgba(0,0,0,0.1);
+    color: #17631b;
+    text-align: left;
+}
+
+.resultado-container-av h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.resultado-container-av ul {
+    padding-left: 18px;
+    margin-top: 8px;
+    color: #2e7d32;
+}
+
+.success-message {
+    font-weight: 700;
+    color: #17631b;
+    margin-top: 12px;
+}
+/* Botão de voltar */
+.voltar-btn {
+    position: absolute; /* Posição fixa na tela */
+    top: 20px; /* 20px do topo */
+    left: 20px; /* 20px da esquerda */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1000; /* Garante que o botão fique acima de outros elementos */
+}
+
+.voltar-btn img {
+    width: 70px; /* Tamanho da imagem da seta */
+    height: auto;
+    transition: transform 0.2s ease;
+}
+
+.voltar-btn img:hover {
+    transform: scale(1.1); /* Efeito de scale no hover */
+}

@@ -61,8 +61,79 @@ const CadastroAtivo = () => {
         }
     };
 
+    const validateForm = () => {
+        const errors = [];
+        const { nome, tipo, valor_unitario, quantidade, tipo_juros, taxa_fixa, indexador, percentual_sobre_indexador, data_emissao, data_vencimento, possuiImposto, aliquotaImposto } = formData;
+
+        // Nome do ativo obrigatório
+        if (!nome.trim()) errors.push('O nome do ativo é obrigatório.');
+
+        // Tipo do ativo obrigatório
+        if (!tipo) errors.push('O tipo do ativo deve ser selecionado.');
+
+        // Valor unitário deve ser > 0
+        if (!valor_unitario || Number(valor_unitario) <= 0) errors.push('Valor unitário deve ser maior que zero.');
+
+        // Quantidade deve ser > 0
+        if (!quantidade || Number(quantidade) <= 0) errors.push('Quantidade deve ser maior que zero.');
+
+        // Taxa fixa requerida para prefixado e híbrido e deve ser >= 0
+        if ((tipo_juros === 'prefixado' || tipo_juros === 'hibrido') && (taxa_fixa === '' || Number(taxa_fixa) < 0)) {
+            errors.push('Taxa fixa anual deve ser informada e ser maior ou igual a zero.');
+        }
+
+        // Para pós-fixado e híbrido: indexador obrigatório
+        if ((tipo_juros === 'posfixado' || tipo_juros === 'hibrido') && !indexador) {
+            errors.push('Indexador deve ser selecionado para tipo de juros pós-fixado ou híbrido.');
+        }
+
+        // Para pós-fixado e híbrido: percentual sobre indexador obrigatório e >= 0
+        if ((tipo_juros === 'posfixado' || tipo_juros === 'hibrido') && (percentual_sobre_indexador === '' || Number(percentual_sobre_indexador) < 0)) {
+            errors.push('Percentual sobre indexador deve ser informado e maior ou igual a zero.');
+        }
+
+        // Data emissão e vencimento obrigatórias
+        if (!data_emissao) errors.push('Data de emissão deve ser informada.');
+        if (!data_vencimento) errors.push('Data de vencimento deve ser informada.');
+
+        // Data emissão deve ser antes da data vencimento
+        if (data_emissao && data_vencimento) {
+            const emissao = new Date(data_emissao);
+            const vencimento = new Date(data_vencimento);
+            if (emissao >= vencimento) {
+            errors.push('Data de emissão deve ser anterior à data de vencimento.');
+            }
+        }
+
+        // Se possui imposto, aliquota deve ser >= 0 e <= 100
+        if (possuiImposto) {
+            if (aliquotaImposto === '') {
+            errors.push('Informe a alíquota do imposto.');
+            } else {
+            const aliquota = Number(aliquotaImposto);
+            if (aliquota < 0 || aliquota > 100) {
+                errors.push('Alíquota do imposto deve estar entre 0 e 100%.');
+            }
+            }
+        }
+
+        return errors;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const validationErrors = validateForm();
+        if (validationErrors.length > 0) {
+            MySwal.fire({
+                icon: 'error',
+                title: 'Erro no cadastro',
+                html: validationErrors.map(err => `<p>${err}</p>`).join(''),
+                confirmButtonColor: '#d33',
+            });
+            return;
+        }
+
 
         const token = localStorage.getItem('access_token');
 
