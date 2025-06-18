@@ -21,28 +21,24 @@ const AvaliadorQuiz = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Função auxiliar para calcular a diferença de anos entre duas datas
+    
     const calculatePeriodInYears = (startDate, endDate) => {
         if (!startDate || !endDate) return null;
         const start = new Date(startDate);
         const end = new Date(endDate);
         const diffTime = Math.abs(end.getTime() - start.getTime());
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        return diffDays / 365.25; // Divide por 365.25 para considerar anos bissextos
+        return diffDays / 365.25; 
     };
 
     useEffect(() => {
         const fetchAtivo = async () => {
             try {
                 const data = await getAtivo(id);
-                // --- LOG 1: Dados brutos do ativo recuperado ---
-                console.log('Dados do ativo recuperado:', data);
-
-                // Calcular periodo_em_anos se data_vencimento e data_emissao existirem
+                
                 if (data.data_emissao && data.data_vencimento) {
                     const calculatedPeriod = calculatePeriodInYears(data.data_emissao, data.data_vencimento);
-                    setAtivo({ ...data, periodo_em_anos: calculatedPeriod }); // Adiciona ou sobrescreve periodo_em_anos
-                    console.log('Período em anos calculado:', calculatedPeriod);
+                    setAtivo({ ...data, periodo_em_anos: calculatedPeriod }); 
                 } else {
                     setAtivo(data);
                     console.warn('Datas de emissão ou vencimento ausentes para cálculo do período em anos.');
@@ -74,35 +70,15 @@ const AvaliadorQuiz = () => {
             return { score: 0, alertas: alertas, recomendacao: "Não foi possível avaliar o ativo." };
         }
 
-        // --- LOG 2: Valores do ativo ANTES da conversão ---
-        console.log('Valores do ativo antes da conversão:');
-        console.log('  ativo.valor_unitario:', ativo.valor_unitario);
-        console.log('  ativo.quantidade:', ativo.quantidade);
-        console.log('  ativo.periodo_em_anos:', ativo.periodo_em_anos); // Agora deve estar lá ou ser null
-        console.log('  ativo.rendimento_esperado:', ativo.rendimento_esperado);
-
-        // Garante que os valores numéricos são tratados como números
         const valorUnitario = parseFloat(ativo.valor_unitario);
         const quantidade = parseInt(ativo.quantidade);
-        const periodoEmAnos = parseFloat(ativo.periodo_em_anos); // Use parseFloat para período, já que pode ser decimal
+        const periodoEmAnos = parseFloat(ativo.periodo_em_anos); 
         const rendimentoEsperado = parseFloat(ativo.rendimento_esperado);
 
-        // --- LOG 3: Valores do ativo DEPOIS da conversão para Number ---
-        console.log('Valores do ativo depois da conversão (parseFloat/parseInt):');
-        console.log('  valorUnitario (parseFloat):', valorUnitario);
-        console.log('  quantidade (parseInt):', quantidade);
-        console.log('  periodoEmAnos (parseFloat):', periodoEmAnos);
-        console.log('  rendimentoEsperado (parseFloat):', rendimentoEsperado);
-
-        // Validação básica dos dados do ativo para o cálculo
         const isCalculable = Number.isFinite(valorUnitario) && Number.isFinite(quantidade) &&
                              Number.isFinite(periodoEmAnos) && Number.isFinite(rendimentoEsperado) &&
                              valorUnitario > 0 && quantidade > 0 && periodoEmAnos > 0;
 
-        // --- LOG 4: Resultado da validação isCalculable ---
-        console.log('isCalculable:', isCalculable);
-
-        // 1. Objetivo do investimento
         if (respostas.objetivo === 'inflação') {
             if (ativo.indexador !== 'IPCA' && ativo.indexador !== 'IGPM') {
                 alertas.push("Este ativo não protege contra inflação.");
@@ -125,11 +101,11 @@ const AvaliadorQuiz = () => {
                 score += 1;
             }
         } else if (respostas.objetivo === 'crescimento') {
-            // Um ativo de crescimento geralmente tem maior prazo e talvez volatilidade
-            if (periodoEmAnos && periodoEmAnos < 5) { // Crescimento geralmente é longo prazo
+        
+            if (periodoEmAnos && periodoEmAnos < 5) {
                 alertas.push("Este ativo pode não ser ideal para crescimento de capital a longo prazo devido ao seu prazo curto.");
                 score -= 1;
-            } else if (ativo.liquidez === 'diaria') { // Ativos de crescimento geralmente não são de liquidez diária
+            } else if (ativo.liquidez === 'diaria') {
                 alertas.push("Este ativo é de liquidez diária, o que pode não se alinhar com um objetivo de crescimento a longo prazo.");
                 score -= 0.5;
             } else {
@@ -137,8 +113,6 @@ const AvaliadorQuiz = () => {
             }
         }
 
-
-        // 2. Risco
         if (respostas.risco === 'baixo') {
             const ativosComMaiorRisco = ['debentures_creditos', 'ações', 'fundos_imobiliarios', 'derivativos'];
             if (ativosComMaiorRisco.includes(ativo.tipo)) {
@@ -170,7 +144,6 @@ const AvaliadorQuiz = () => {
             }
         }
 
-        // 3. Imposto
         if (respostas.prefere_isencao && ativo.possuiImposto) {
             alertas.push("Este ativo é tributado (não possui isenção de imposto de renda).");
             score -= 1;
@@ -178,7 +151,6 @@ const AvaliadorQuiz = () => {
             score += 1;
         }
 
-        // 4. Resgate antecipado
         if (respostas.precisa_resgatar_antes && ativo.liquidez !== 'diaria') {
             alertas.push("Este ativo não pode ser resgatado antes do vencimento sem perdas ou com baixa liquidez.");
             score -= 1;
@@ -186,20 +158,10 @@ const AvaliadorQuiz = () => {
             score += 1;
         }
 
-        // 5. Rentabilidade esperada comparada ao benchmark
         if (isCalculable) {
             const valorInvestidoInicial = valorUnitario * quantidade;
-            const benchmarkTaxaAnual = 0.12; // 12% ao ano como benchmark
+            const benchmarkTaxaAnual = 0.12; 
             const benchmarkTotal = valorInvestidoInicial * Math.pow(1 + benchmarkTaxaAnual, periodoEmAnos);
-
-            // --- LOG 5: Valores para cálculo da rentabilidade e benchmark ---
-            console.log('Valores para cálculo de rentabilidade:');
-            console.log('  valorInvestidoInicial:', valorInvestidoInicial);
-            console.log('  periodoEmAnos:', periodoEmAnos);
-            console.log('  benchmarkTaxaAnual:', benchmarkTaxaAnual);
-            console.log('  benchmarkTotal:', benchmarkTotal);
-            console.log('  rendimentoEsperado:', rendimentoEsperado);
-
 
             if (rendimentoEsperado > benchmarkTotal) {
                 score += 1;
@@ -211,9 +173,6 @@ const AvaliadorQuiz = () => {
             alertas.push("Dados de rentabilidade do ativo incompletos ou inválidos para avaliação.");
         }
 
-        // --- Novos Critérios de Avaliação ---
-
-        // 6. Prazo de Investimento
         if (respostas.prazo_investimento === 'curto_prazo') {
             if (periodoEmAnos && periodoEmAnos > 2) { // Curto prazo: idealmente até 2 anos
                 alertas.push("O prazo de vencimento do ativo é longo para seu objetivo de curto prazo.");
@@ -237,7 +196,6 @@ const AvaliadorQuiz = () => {
             }
         }
 
-        // 7. Tolerância à Oscilação (Volatilidade)
         const ativosVolateis = ['ações', 'fundos_imobiliarios', 'derivativos', 'criptomoedas'];
         const ativosEstaveis = ['CDB', 'LCI', 'LCA', 'tesouro_selic'];
 
@@ -250,8 +208,7 @@ const AvaliadorQuiz = () => {
             }
         } else if (respostas.tolerancia_oscilacao === 'media') {
             if (ativosVolateis.includes(ativo.tipo) && !ativosEstaveis.includes(ativo.tipo)) {
-                 // Ativo de volatilidade moderada pode ser aceitável, mas alertamos se for muito volátil
-                 if (ativo.tipo === 'ações' || ativo.tipo === 'derivativos') { // Exemplos de muito voláteis
+                 if (ativo.tipo === 'ações' || ativo.tipo === 'derivativos') {
                      alertas.push("Este ativo pode ter mais oscilação do que um perfil moderado idealmente busca.");
                      score -= 0.5;
                  } else {
@@ -272,7 +229,6 @@ const AvaliadorQuiz = () => {
             }
         }
 
-        // 8. Conhecimento do Mercado de Investimentos
         const ativosComplexos = ['ações', 'derivativos', 'fundos_complexos', 'criptomoedas', 'debêntures_incentivadas'];
 
         if (respostas.conhecimento_mercado === 'pouco') {
@@ -293,8 +249,6 @@ const AvaliadorQuiz = () => {
             score += 1;
         }
 
-        // Recomendações finais baseadas no score
-        // O número de perguntas agora é 8. Score máximo: 8.
         if (score >= 6) {
             recomendacao = "Este investimento parece muito adequado para você! Há uma forte compatibilidade com seus objetivos e perfil.";
         } else if (score >= 3) {
@@ -354,7 +308,7 @@ const AvaliadorQuiz = () => {
                                 </select>
                             </div>
 
-                            {/* Pergunta 3: Prazo de Investimento (NOVA) */}
+                            {/* Pergunta 3: Prazo de Investimento  */}
                             <div className="campo-container-av">
                                 <label htmlFor="prazo-investimento-select">Por quanto tempo você pretende manter este investimento?</label>
                                 <select id="prazo-investimento-select" name="prazo_investimento" value={respostas.prazo_investimento} onChange={handleChange}>
@@ -365,7 +319,7 @@ const AvaliadorQuiz = () => {
                                 </select>
                             </div>
 
-                            {/* Pergunta 4: Tolerância à Oscilação (NOVA) */}
+                            {/* Pergunta 4: Tolerância à Oscilação  */}
                             <div className="campo-container-av">
                                 <label htmlFor="tolerancia-oscilacao-select">Qual sua tolerância a flutuações e perdas temporárias no valor do investimento?</label>
                                 <select id="tolerancia-oscilacao-select" name="tolerancia_oscilacao" value={respostas.tolerancia_oscilacao} onChange={handleChange}>
@@ -376,7 +330,7 @@ const AvaliadorQuiz = () => {
                                 </select>
                             </div>
 
-                            {/* Pergunta 5: Conhecimento do Mercado (NOVA) */}
+                            {/* Pergunta 5: Conhecimento do Mercado  */}
                             <div className="campo-container-av">
                                 <label htmlFor="conhecimento-mercado-select">Qual seu nível de conhecimento sobre o mercado de investimentos?</label>
                                 <select id="conhecimento-mercado-select" name="conhecimento_mercado" value={respostas.conhecimento_mercado} onChange={handleChange}>

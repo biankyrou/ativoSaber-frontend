@@ -1,9 +1,8 @@
-// src/pages/Roadmap/index.js (ou Roadmap.jsx)
 import React, { useState } from 'react';
 import './index.css';
 
 const Roadmap = () => {
-  const [activeNodeId, setActiveNodeId] = useState(null); // ID do nó ativo para a barra lateral
+  const [activeNodeId, setActiveNodeId] = useState(null); 
 
   const roadmapNodes = [
      {

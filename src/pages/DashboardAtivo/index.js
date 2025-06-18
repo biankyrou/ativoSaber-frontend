@@ -8,7 +8,6 @@ import withReactContent from 'sweetalert2-react-content';
 
 const MySwal = withReactContent(Swal);
 
-// 🔥 Função para formatar o tipo do ativo
 const formatarTipo = (tipo) => {
     const map = {
         renda_fixa_bancaria: 'Renda Fixa Bancária',
@@ -18,7 +17,6 @@ const formatarTipo = (tipo) => {
     return map[tipo] || tipo;
 };
 
-// 🔥 Função para formatar o tipo de negociação
 const formatarNegociacao = (tipo) => {
     const map = {
         bolsa: 'Bolsa',

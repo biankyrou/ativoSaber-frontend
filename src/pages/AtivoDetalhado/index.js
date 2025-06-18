@@ -8,7 +8,6 @@ import { differenceInMonths, addMonths, format } from 'date-fns';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 import './index.css';
 
-// Funções de tradução dos enums
 const traduzirTipoAtivo = (tipo) => {
     const mapa = {
         'renda_fixa_bancaria': 'Renda Fixa Bancária',
@@ -43,7 +42,6 @@ const traduzirTipoJuros = (valor) => {
     return mapa[valor] || valor;
 };
 
-// Solicitar resgate
 const solicitarResgate = async (id, dataResgate) => {
     const token = localStorage.getItem('access_token');  
     if (!token) {
@@ -65,7 +63,6 @@ const solicitarResgate = async (id, dataResgate) => {
     }
 };
 
-// Geração dos dados do gráfico
 const gerarDadosRendimento = (ativo) => {
     const inicio = new Date(ativo.data_emissao);
     const fim = new Date(ativo.data_vencimento);

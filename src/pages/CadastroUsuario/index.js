@@ -57,7 +57,6 @@ const CadastroUsuario = () => {
         }
       });
 
-      // Limpa campos e mensagens
       setNome('');
       setEmail('');
       setSenha('');

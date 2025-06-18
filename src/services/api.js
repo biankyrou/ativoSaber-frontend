@@ -58,7 +58,6 @@ export const deletarAtivo = async (id) => {
         const response = await axios.delete(`${API_URL}/ativos/deletar/${id}/`, {
             headers: getAuthHeaders(),
         });
-        console.log("Ativo deletado com sucesso.");
         return response.data;
     } catch (error) {
         console.error("Erro ao deletar ativo:", error.response?.data || error.message);
