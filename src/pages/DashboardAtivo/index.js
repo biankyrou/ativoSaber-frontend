@@ -1,12 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { listarAtivos, deletarAtivo } from '../../services/api';
-import setaEsquerda from '../../assets/seta-esquerda.png'; 
+import setaEsquerda from '../../assets/seta-esquerda.png';
 import './index.css';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 const MySwal = withReactContent(Swal);
+
+// 🔥 Função para formatar o tipo do ativo
+const formatarTipo = (tipo) => {
+    const map = {
+        renda_fixa_bancaria: 'Renda Fixa Bancária',
+        titulos_publicos: 'Títulos Públicos',
+        debentures_creditos: 'Debêntures e Créditos',
+    };
+    return map[tipo] || tipo;
+};
+
+// 🔥 Função para formatar o tipo de negociação
+const formatarNegociacao = (tipo) => {
+    const map = {
+        bolsa: 'Bolsa',
+        balcao: 'Balcão',
+    };
+    return map[tipo] || tipo;
+};
 
 const ListaAtivos = () => {
     const [ativos, setAtivos] = useState([]);
@@ -39,19 +58,12 @@ const ListaAtivos = () => {
             text: "Tem certeza que deseja excluir este ativo?",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3E846B',  
-            cancelButtonColor: '#e77368',   
+            confirmButtonColor: '#3E846B',
+            cancelButtonColor: '#e77368',
             confirmButtonText: 'Sim, excluir!',
             cancelButtonText: 'Cancelar',
             background: '#fefefe',
             color: '#333',
-            customClass: {
-                popup: 'custom-font',          
-                title: 'custom-font',          
-                htmlContainer: 'custom-font',  
-                confirmButton: 'custom-font',  
-                cancelButton: 'custom-font'    
-            }
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
@@ -71,9 +83,9 @@ const ListaAtivos = () => {
                         confirmButtonColor: '#e77368',
                     });
                     console.error("Erro:", err);
-                    }
                 }
-            });
+            }
+        });
     };
 
     if (loading) return <p>Carregando ativos...</p>;
@@ -82,7 +94,6 @@ const ListaAtivos = () => {
     return (
         <section className="lista-ativos">
             <div className="container-lista">
-                {/* Botão de Voltar */}
                 <button className="voltar-btn" onClick={() => navigate('/cadastro-ativo')}>
                     <img src={setaEsquerda} alt="Voltar" />
                 </button>
@@ -96,7 +107,13 @@ const ListaAtivos = () => {
                         {ativos.map((ativo) => (
                             <li key={ativo.id}>
                                 <div className="ativo-info">
-                                    <strong>{ativo.nome}</strong> - {ativo.tipo} - R${ativo.valor_investido}
+                                    <strong>{ativo.nome}</strong> - {formatarTipo(ativo.tipo)} - 
+                                    {' R$ '}
+                                    {Number(ativo.valor_investido).toLocaleString('pt-BR', {
+                                        style: 'currency',
+                                        currency: 'BRL',
+                                        minimumFractionDigits: 2
+                                    })}
                                 </div>
                                 <div className="button-group">
                                     <Link 
